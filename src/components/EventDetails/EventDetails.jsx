@@ -87,7 +87,7 @@ const EventDetails = ({ data }) => {
             Rangkaian Acara
           </h2>
           <p className="text-gray-600 text-lg">
-            Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan kami pada:
+            Dengan memohon berkat dan ridho Tuhan Yang Maha Esa, kami bermaksud menyelenggarakan pernikahan kami pada:
           </p>
         </motion.div>
 
