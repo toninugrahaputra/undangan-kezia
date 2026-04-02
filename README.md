@@ -9,7 +9,8 @@ Starter pack undangan digital modern dengan React. Template undangan pernikahan 
 ## ✨ Fitur
 
 - 🎨 **Modern Minimalist Design** - Desain clean dan elegan
-- 🎬 **Animated Cover** - Cover dengan animasi smooth dan tombol "Buka Undangan"
+- 🎬 **Animated Cover** - Cover dengan animasi smooth dan tombol "Buka Undangan" + confetti effect
+- 👫 **Couple Story Section** - Section personal dengan parallax scroll, photo slides, dan bio interaktif
 - ⏰ **Countdown Timer** - Timer hitung mundur ke tanggal pernikahan
 - 📸 **Photo Gallery** - Galeri foto dengan lightbox dan navigasi
 - 📝 **RSVP Form** - Form konfirmasi kehadiran dengan integrasi WhatsApp
@@ -18,6 +19,7 @@ Starter pack undangan digital modern dengan React. Template undangan pernikahan 
 - 💬 **Quote Section** - Bagian quote/ayat tentang pernikahan
 - 📱 **Responsive Design** - Tampil sempurna di semua device
 - ⚡ **Fast Performance** - Dibangun dengan Vite untuk loading cepat
+- 🎭 **Advanced Animations** - Framer Motion dengan text reveal, parallax, dan scroll-triggered effects
 
 ## 🚀 Quick Start
 
@@ -65,6 +67,8 @@ Semua data undangan ada di file `src/data/invitationData.json`. Edit file ini un
       "name": "Nama Pria Lengkap",
       "nickname": "Panggilan Pria",
       "photo": "URL foto pria",
+      "bio": "Teks bio singkat tentang pria",
+      "hobbies": ["Hobi 1", "Hobi 2", "Hobi 3"],
       "parents": {
         "father": "Bpk. Nama Ayah",
         "mother": "Ibu Nama Ibu"
@@ -74,11 +78,14 @@ Semua data undangan ada di file `src/data/invitationData.json`. Edit file ini un
       "name": "Nama Wanita Lengkap",
       "nickname": "Panggilan Wanita",
       "photo": "URL foto wanita",
+      "bio": "Teks bio singkat tentang wanita",
+      "hobbies": ["Hobi 1", "Hobi 2", "Hobi 3"],
       "parents": {
         "father": "Bpk. Nama Ayah",
         "mother": "Ibu Nama Ibu"
       }
-    }
+    },
+    "story": "Cerita singkat tentang bagaimana pasangan bertemu dan perjalanan cinta mereka"
   },
   "event": {
     "weddingDate": "2026-12-25T08:00:00",
@@ -184,20 +191,23 @@ undangan-digital-modern/
 ├── public/                 # Static assets (foto, music, dll)
 ├── src/
 │   ├── components/        # React components
-│   │   ├── Cover/        # Cover dengan tombol buka undangan
-│   │   ├── Hero/         # Hero section dengan nama couple
-│   │   ├── Countdown/    # Countdown timer
-│   │   ├── Quote/        # Quote/ayat section
-│   │   ├── EventDetails/ # Detail acara (akad & resepsi)
-│   │   ├── Gallery/      # Galeri foto dengan lightbox
-│   │   ├── RSVP/         # Form konfirmasi kehadiran
-│   │   ├── Map/          # Google Maps integration
-│   │   └── MusicPlayer/  # Music player floating button
+│   │   ├── Cover/           # Cover dengan tombol buka undangan + confetti
+│   │   ├── Hero/            # Hero section dengan nama couple + text reveal + parallax
+│   │   ├── CoupleSection/   # Couple story section dengan scroll animations
+│   │   ├── Countdown/       # Countdown timer
+│   │   ├── Quote/           # Quote/ayat section
+│   │   ├── EventDetails/    # Detail acara (akad & resepsi)
+│   │   ├── Gallery/         # Galeri foto dengan lightbox
+│   │   ├── RSVP/            # Form konfirmasi kehadiran
+│   │   ├── Map/             # Google Maps integration
+│   │   └── MusicPlayer/     # Music player floating button
+│   ├── utils/
+│   │   └── animationVariants.jsx  # Reusable animation utilities
 │   ├── data/
-│   │   └── invitationData.json  # Data undangan
-│   ├── App.jsx           # Main app component
-│   ├── main.jsx          # Entry point
-│   └── index.css         # Global styles
+│   │   └── invitationData.json    # Data undangan
+│   ├── App.jsx            # Main app component
+│   ├── main.jsx           # Entry point
+│   └── index.css          # Global styles
 ├── index.html
 ├── package.json
 ├── vite.config.js
@@ -237,9 +247,41 @@ undangan-digital-modern/
 - **React 18** - UI library
 - **Vite** - Build tool dan dev server
 - **TailwindCSS** - Utility-first CSS framework
-- **Framer Motion** - Animation library
+- **Framer Motion** - Animation library dengan scroll-triggered effects
+- **Canvas Confetti** - Confetti animation library
 - **Lucide React** - Icon library
 - **React Countdown** - Countdown timer component
+
+## 🎬 Fitur Animasi
+
+Undangan ini dilengkapi dengan animasi premium yang halus dan elegan:
+
+### Confetti Effect
+- Trigger saat tombol "Buka Undangan" diklik
+- Warna pink/white sesuai tema wedding
+- Durasi 3 detik dengan gradual fade-out
+
+### Text Reveal Animations
+- Letter-by-letter animation di Hero section
+- Staggered text reveal dengan 3D rotation effect
+- Smooth easing untuk natural feel
+
+### Parallax Background Effects
+- Multi-layer floating elements (hearts, circles, sparkles)
+- Depth effect saat scroll
+- Different scroll speeds untuk layering
+
+### Couple Story Section
+- Scroll-triggered animations untuk groom & bride profiles
+- Photo slides from left/right
+- Interactive hover effects
+- Personal bio dengan hobbies badges
+- Our story card dengan floating decorations
+
+### Scroll Animations
+- Semua sections menggunakan viewport-based animations
+- Animations trigger hanya sekali (performance optimized)
+- Smooth transitions antar sections
 
 ## 📝 Customization Tips
 

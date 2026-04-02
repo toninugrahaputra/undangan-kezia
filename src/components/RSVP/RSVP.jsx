@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Send, MessageCircle, CheckCircle } from 'lucide-react'
+import { Send, CheckCircle, Heart } from 'lucide-react'
 
 const RSVP = ({ data }) => {
   const [formData, setFormData] = useState({
@@ -51,149 +51,189 @@ const RSVP = ({ data }) => {
   }
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-2xl mx-auto px-4">
+    <section id="rsvp-section" className="relative py-24 md:py-32 bg-gray-50 overflow-hidden">
+      {/* Optimized Background - Removed heavy string anims & radial-gradient recalculations */}
+      <div className="absolute inset-0 pointer-events-none opacity-40">
+        <div className="absolute top-1/4 left-0 w-full md:w-3/4 h-[50vh] bg-gradient-to-br from-blush-100 to-transparent blur-[120px]" style={{ transform: 'translateZ(0)' }} />
+      </div>
+
+      {/* Floating Ornaments - Reduced count & simplified */}
+      <motion.div
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-32 right-10 text-blush-400/20 hidden lg:block"
+      >
+        <Heart className="w-16 h-16" fill="currentColor" />
+      </motion.div>
+
+      <div className="max-w-4xl mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <MessageCircle className="w-8 h-8 text-pink-500" />
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900">
-              RSVP
-            </h2>
+          <div className="flex justify-center items-center gap-4 mb-4">
+            <div className="w-12 h-px bg-gold-300"></div>
+            <p className="text-gold-600 uppercase tracking-[0.3em] text-sm font-medium">Buku Tamu</p>
+            <div className="w-12 h-px bg-gold-300"></div>
           </div>
-          <p className="text-gray-600 text-lg">
-            Mohon konfirmasi kehadiran Anda
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 drop-shadow-sm mb-6">
+            Konfirmasi Kehadiran
+          </h2>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto font-light">
+            Mohon konfirmasi kehadiran Anda untuk membantu kami mempersiapkan acara sebaik mungkin.
           </p>
         </motion.div>
 
-        {/* RSVP Form */}
+        {/* RSVP Form container - Stripped massive blur-3xl moving elements and lowered DOM nesting */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
+          className="relative max-w-2xl mx-auto"
         >
-          {isSubmitted ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center"
-            >
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h3 className="text-2xl font-serif font-bold text-gray-900 mb-2">
-                Terima Kasih!
-              </h3>
-              <p className="text-gray-700">
-                Konfirmasi kehadiran Anda telah terkirim melalui WhatsApp.
-              </p>
-            </motion.div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name */}
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                  Nama Lengkap *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
-                  placeholder="Masukkan nama lengkap Anda"
-                />
-              </div>
-
-              {/* Attendance */}
-              <div>
-                <label htmlFor="attendance" className="block text-sm font-medium text-gray-700 mb-2">
-                  Konfirmasi Kehadiran *
-                </label>
-                <select
-                  id="attendance"
-                  name="attendance"
-                  value={formData.attendance}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+          {/* Main Card - Removed backdrop-blur-lg and used solid white for vastly superior mobile perf */}
+          <div className="p-8 md:p-12 lg:p-14 bg-white rounded-[2rem] shadow-xl border border-gray-100 relative overflow-hidden">
+             
+            <div className="relative z-10">
+              {isSubmitted ? (
+                /* Success Message */
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className="text-center py-16"
                 >
-                  <option value="">Pilih konfirmasi</option>
-                  <option value="Hadir">Ya, saya akan hadir</option>
-                  <option value="Tidak Hadir">Maaf, saya tidak bisa hadir</option>
-                  <option value="Ragu">Masih ragu-ragu</option>
-                </select>
-              </div>
+                  <motion.div
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                    className="inline-block mb-6"
+                  >
+                    <CheckCircle className="w-20 h-20 text-green-500 mx-auto" />
+                  </motion.div>
+                  <h3 className="text-3xl font-serif font-bold text-gray-900 mb-4">
+                    Terima Kasih!
+                  </h3>
+                  <p className="text-gray-600 text-lg font-light">
+                    Pesan dan konfirmasi kehadiran Anda telah dikirim.
+                  </p>
+                </motion.div>
+              ) : (
+                /* Form */
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Name Field */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Nama Lengkap
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-gold-400 focus:ring-4 focus:ring-gold-50 transition-all outline-none text-gray-900"
+                      placeholder="Masukkan nama lengkap Anda"
+                    />
+                  </div>
 
-              {/* Number of Guests */}
-              <div>
-                <label htmlFor="guests" className="block text-sm font-medium text-gray-700 mb-2">
-                  Jumlah Tamu
-                </label>
-                <select
-                  id="guests"
-                  name="guests"
-                  value={formData.guests}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
-                >
-                  <option value="1">1 Orang</option>
-                  <option value="2">2 Orang</option>
-                  <option value="3">3 Orang</option>
-                  <option value="4">4 Orang</option>
-                </select>
-              </div>
+                  {/* Attendance Selection */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                      Konfirmasi Kehadiran
+                    </label>
+                    <div className="grid grid-cols-2 gap-4">
+                      {(['Hadir', 'Tidak Hadir']).map((option) => (
+                        <label
+                          key={option}
+                          className={`relative p-4 rounded-xl border cursor-pointer transition-all ${
+                            formData.attendance === option
+                              ? 'bg-gold-50 border-gold-400 text-gold-800 shadow-sm'
+                              : 'bg-white border-gray-200 hover:border-gold-300 text-gray-600'
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name="attendance"
+                            value={option}
+                            checked={formData.attendance === option}
+                            onChange={handleChange}
+                            required
+                            className="sr-only"
+                          />
+                          <span className={`block text-center font-medium`}>
+                            {option}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
 
-              {/* Message */}
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Pesan / Ucapan
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all resize-none"
-                  placeholder="Tuliskan pesan atau ucapan untuk kami"
-                />
-              </div>
+                  {/* Guests Field */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Jumlah Tamu
+                    </label>
+                    <select
+                      name="guests"
+                      value={formData.guests}
+                      onChange={handleChange}
+                      className="w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-gold-400 focus:ring-4 focus:ring-gold-50 transition-all outline-none text-gray-900"
+                    >
+                      {[1, 2, 3, 4, 5].map((num) => (
+                        <option key={num} value={num.toString()}>
+                          {num} {num === 1 ? 'Orang' : 'Orang'}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-              {/* Submit Button */}
-              <motion.button
-                type="submit"
-                disabled={isSubmitting}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full font-medium hover:from-pink-600 hover:to-purple-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    <span>Mengirim...</span>
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-5 h-5" />
-                    <span>Kirim Konfirmasi via WhatsApp</span>
-                  </>
-                )}
-              </motion.button>
+                  {/* Message Field */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Pesan (Opsional)
+                    </label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows="4"
+                      className="w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-gold-400 focus:ring-4 focus:ring-gold-50 transition-all outline-none text-gray-900 resize-none"
+                      placeholder="Tinggalkan pesan untuk mempelai..."
+                    />
+                  </div>
 
-              <p className="text-sm text-gray-600 text-center">
-                Konfirmasi akan dikirim melalui WhatsApp
-              </p>
-            </form>
-          )}
+                  {/* Submit Button */}
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-gray-900 text-white rounded-xl shadow-lg hover:shadow-xl hover:bg-gray-800 active:scale-[0.98] transition-all font-medium disabled:opacity-70 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          <span>Memproses...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5" />
+                          <span>Kirim Konfirmasi via WhatsApp</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
         </motion.div>
+
       </div>
     </section>
   )

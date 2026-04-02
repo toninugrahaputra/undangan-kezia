@@ -4,6 +4,8 @@
       "name": "Andreas Pratama",
       "nickname": "Andreas",
       "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+      "bio": "Hai! Saya Andreas, seorang software engineer yang mencintai kopi dan coding. Saya percaya bahwa cinta sejati itu tentang saling mendukung dan tumbuh bersama.",
+      "hobbies": ["Coding", "Traveling", "Photography", "Coffee"],
       "parents": {
         "father": "Bpk. Budi Santoso",
         "mother": "Ibu Maria Santoso"
@@ -13,11 +15,14 @@
       "name": "Christine Wijaya",
       "nickname": "Christine",
       "photo": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+      "bio": "Hello! Saya Christine, seorang designer yang suka baking dan membaca novel. Saya bersyukur bisa menemukan pasangan hidup yang selalu mendukung mimpi-mimpi saya.",
+      "hobbies": ["Design", "Baking", "Reading", "Music"],
       "parents": {
         "father": "Bpk. Johannes Wijaya",
         "mother": "Ibu Deborah Wijaya"
       }
-    }
+    },
+    "story": "Kami bertemu di kampus tahun 2020 saat satu kelas. Perkenalan singkat di perpustakaan berlanjut menjadi friendship yang mendalam. Tiga tahun bersama, kami belajar banyak hal satu sama lain. Dan sekarang, kami siap melangkah ke jenjang yang lebih serius bersama."
   },
   "event": {
     "weddingDate": "2026-06-01T08:00:00",
@@ -40,16 +45,16 @@
     "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&h=400&fit=crop",
     "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1522673607200-1645062cd958?w=600&h=400&fit=crop"
+    "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&h=400&fit=crop"
   ],
   "quote": {
     "text": "Kasih itu sabar, kasih itu murah hati, ia tidak cemburu. Kasih itu tidak memegahkan diri, ia tidak sombong. Ia tidak melakukan yang tidak sopan, ia tidak mencari keuntungan diri sendiri, ia tidak mudah marah. Ia tidak menyimpan kesalahan orang lain. Kasih tidak bersukacita karena ketidakadilan, tetapi karena kebenaran. Kasih menutupi segala sesuatu, percaya segala sesuatu, mengharapkan segala sesuatu, sabar menanggung segala sesuatu. Kasih tidak berkesudahan.",
     "source": "1 Korintus 13:4-8a"
   },
   "music": {
-    "title": "Beautiful in White",
-    "artist": "Shane Filan",
-    "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+    "title": "Happy Day",
+    "artist": "Tim Hughes (Christian Wedding Song)",
+    "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
   },
   "map": {
     "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.054978324468!2d106.7972423147693!3d-6.225587995493057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f14d8765665b%3A0x6280846c9b9b9c9c!2sHotel%20Mulia%20Senayan!5e0!3m2!1sen!2sid!4v1234567890",
