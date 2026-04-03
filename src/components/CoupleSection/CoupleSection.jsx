@@ -14,8 +14,8 @@ const CinematicStory = ({ data, isMobile }) => {
   // === ANIMATION TIMELINES (0.0 to 1.0) ===
 
   // Parameter Layout Adaptif
-  const initialGroomOffset = isMobile ? "-8vh" : "-10vw"
-  const initialBrideOffset = isMobile ? "8vh" : "10vw"
+  const initialGroomOffset = isMobile ? "-25vh" : "-25vw"
+  const initialBrideOffset = isMobile ? "25vh" : "25vw"
   
   const focusGroomImgOffset = isMobile ? "-25vh" : "15vw"
   const focusGroomTextOffset = isMobile ? "20vh" : "-20vw"
@@ -67,7 +67,8 @@ const CinematicStory = ({ data, isMobile }) => {
 
   // INTRO TITLE
   const introOpacity = useTransform(scrollYProgress, [0, 0.05, 0.15], [0, 1, 0])
-  const introY = useTransform(scrollYProgress, [0, 0.15], ["0vh", "-20vh"])
+  const introX = useTransform(scrollYProgress, [0, 0.05, 0.15], isMobile ? ["-50vw", "0vw", "50vw"] : ["0vw", "0vw", "0vw"])
+  const introY = useTransform(scrollYProgress, [0, 0.15], isMobile ? ["0vh", "0vh"] : ["0vh", "-20vh"])
 
   // OUTRO / FINAL NARRATIVE
   const outroOpacity = useTransform(scrollYProgress, [0.8, 0.9, 0.95], [0, 1, 0])
@@ -99,7 +100,7 @@ const CinematicStory = ({ data, isMobile }) => {
         ======================================================== */}
         <motion.div 
           className="absolute text-center z-30 pointer-events-none w-full px-4"
-          style={{ opacity: introOpacity, y: introY }}
+          style={{ opacity: introOpacity, y: introY, x: introX }}
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white tracking-widest drop-shadow-[0_0_15px_rgba(251,191,36,0.3)]">
             Sang Mempelai
@@ -114,7 +115,7 @@ const CinematicStory = ({ data, isMobile }) => {
 
         {/* Groom Photo */}
         <motion.div 
-          className="absolute w-52 h-72 md:w-[22rem] md:h-[30rem] rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 z-20"
+          className="absolute w-48 h-64 md:w-[20rem] md:h-[28rem] rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 z-20"
           style={{ x: groomX, y: groomY, scale: groomScale, opacity: groomOpacity }}
         >
           <motion.img 
@@ -155,7 +156,7 @@ const CinematicStory = ({ data, isMobile }) => {
 
         {/* Bride Photo */}
         <motion.div 
-          className="absolute w-52 h-72 md:w-[22rem] md:h-[30rem] rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 z-20"
+          className="absolute w-48 h-64 md:w-[20rem] md:h-[28rem] rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 z-20"
           style={{ x: brideX, y: brideY, scale: brideScale, opacity: brideOpacity }}
         >
           <motion.img 
@@ -213,8 +214,8 @@ const CoupleSection = ({ data }) => {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768)
-    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    setIsMobile(window.innerWidth < 1024)
+    const handleResize = () => setIsMobile(window.innerWidth < 1024)
     window.addEventListener('resize', handleResize)
     setMounted(true)
     return () => window.removeEventListener('resize', handleResize)

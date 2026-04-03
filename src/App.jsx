@@ -127,6 +127,20 @@ function App() {
               >
                 <span className="text-sm font-medium tracking-wide">Terima kasih atas doa & restu Anda</span>
               </motion.div>
+
+              {/* Sponsor Credits */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 1 }}
+                viewport={{ once: true }}
+                className="mt-12 text-xs text-gray-400 flex items-center justify-center gap-1.5 font-light"
+              >
+                <span>Sponsored by</span>
+                <a href="https://www.instagram.com/tnugra_/" target="_blank" rel="noopener noreferrer" className="hover:text-gold-400 transition-colors border-b border-gray-600 hover:border-gold-400">Toni</a>
+                <span>&</span>
+                <a href="https://www.instagram.com/dev_mdc/" target="_blank" rel="noopener noreferrer" className="hover:text-gold-400 transition-colors border-b border-gray-600 hover:border-gold-400">Cahyo</a>
+              </motion.div>
             </div>
 
             {/* Bottom Gradient Line */}

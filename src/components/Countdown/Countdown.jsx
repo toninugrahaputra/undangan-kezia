@@ -2,6 +2,50 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Clock, Heart, Sparkles } from 'lucide-react'
 
+const TimeUnit = ({ value, label, index }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 40, scale: 0.9 }}
+    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+    transition={{ duration: 1, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+    viewport={{ once: true }}
+    whileHover={{ y: -10, scale: 1.05 }}
+    className="relative group"
+  >
+    {/* Glassmorphism Card */}
+    <div className="relative p-5 md:p-10 bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-lg rounded-2xl md:rounded-3xl shadow-2xl border border-white/30 min-w-[80px] xs:min-w-[90px] md:min-w-[160px] overflow-hidden flex flex-col items-center justify-center aspect-square">
+      {/* Animated Background Gradient */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-gold-400/20 to-blush-400/20 rounded-full blur-2xl"
+      />
+
+      {/* Content */}
+      <div className="relative z-10 w-full text-center">
+        <span
+          className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-br from-white via-gold-100 to-white bg-clip-text text-transparent font-serif block mb-2 md:mb-4"
+        >
+          {String(value).padStart(2, '0')}
+        </span>
+        <span className="text-[10px] md:text-sm text-white/80 uppercase tracking-[0.2em] md:tracking-[0.3em] font-medium block">
+          {label}
+        </span>
+      </div>
+
+      {/* Shine Effect */}
+      <motion.div
+        animate={{ x: ['-100%', '200%'] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity"
+      />
+
+      {/* Decorative Corner */}
+      <div className="absolute top-2 right-2 w-3 h-3 rounded-full bg-gold-400/50" />
+      <div className="absolute bottom-2 left-2 w-3 h-3 rounded-full bg-blush-400/50" />
+    </div>
+  </motion.div>
+)
+
 const Countdown = ({ data }) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -31,54 +75,6 @@ const Countdown = ({ data }) => {
 
     return () => clearInterval(timer)
   }, [data.event.weddingDate])
-
-  const TimeUnit = ({ value, label, index }) => (
-    <motion.div
-      initial={{ opacity: 0, y: 40, scale: 0.9 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 1, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      viewport={{ once: true }}
-      whileHover={{ y: -10, scale: 1.05 }}
-      className="relative group"
-    >
-      {/* Glassmorphism Card */}
-      <div className="relative p-8 md:p-12 bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/30 min-w-[140px] md:min-w-[180px] overflow-hidden">
-        {/* Animated Background Gradient */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-gold-400/20 to-blush-400/20 rounded-full blur-2xl"
-        />
-
-        {/* Content */}
-        <div className="relative z-10">
-          <motion.span
-            key={value}
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-br from-white via-gold-100 to-white bg-clip-text text-transparent font-serif block mb-4"
-          >
-            {String(value).padStart(2, '0')}
-          </motion.span>
-          <span className="text-xs md:text-sm text-white/80 uppercase tracking-[0.3em] font-medium">
-            {label}
-          </span>
-        </div>
-
-        {/* Shine Effect */}
-        <motion.div
-          animate={{ x: ['-100%', '200%'] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity"
-        />
-
-        {/* Decorative Corner */}
-        <div className="absolute top-2 right-2 w-3 h-3 rounded-full bg-gold-400/50" />
-        <div className="absolute bottom-2 left-2 w-3 h-3 rounded-full bg-blush-400/50" />
-      </div>
-    </motion.div>
-  )
 
   return (
     <section id="countdown-section" className="relative py-32 bg-gradient-to-br from-rose-900 via-rose-800 to-gold-900 overflow-hidden">
@@ -152,31 +148,13 @@ const Countdown = ({ data }) => {
         </motion.div>
 
         {/* Countdown Timer with Enhanced Spacing */}
-        <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
+        <div className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-8 justify-items-center relative z-10 max-w-4xl mx-auto">
           <TimeUnit value={timeLeft.days} label="Hari" index={0} />
-          <motion.div
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-4xl md:text-6xl text-gold-300 font-light"
-          >
-            :
-          </motion.div>
+          
+          {/* Decorative dots removed for mobile grid elegance, only show on huge screens if needed, 
+              but for grid-cols-4 we don't need the colon separators clogging up the cells. */}
           <TimeUnit value={timeLeft.hours} label="Jam" index={1} />
-          <motion.div
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-            className="text-4xl md:text-6xl text-gold-300 font-light"
-          >
-            :
-          </motion.div>
           <TimeUnit value={timeLeft.minutes} label="Menit" index={2} />
-          <motion.div
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-            className="text-4xl md:text-6xl text-gold-300 font-light"
-          >
-            :
-          </motion.div>
           <TimeUnit value={timeLeft.seconds} label="Detik" index={3} />
         </div>
 
