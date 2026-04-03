@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { Home, Users, Clock, Quote, Calendar, Images, Mail, MapPin, X } from 'lucide-react'
+import { Home, Users, Clock, Quote, Calendar, Images, Mail, MapPin, X, MoreVertical } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 const FloatingNavigation = () => {
@@ -8,13 +8,12 @@ const FloatingNavigation = () => {
 
   const sections = [
     { id: 'hero', icon: Home, label: 'Home' },
-    { id: 'couple-section', icon: Users, label: 'Pasangan' },
-    { id: 'countdown-section', icon: Clock, label: 'Countdown' },
-    { id: 'quote-section', icon: Quote, label: 'Kutipan' },
-    { id: 'event-section', icon: Calendar, label: 'Acara' },
-    { id: 'gallery-section', icon: Images, label: 'Galeri' },
+    { id: 'couple-section', icon: Users, label: 'Artist' },
+    { id: 'event-section', icon: Calendar, label: 'Tour Date' },
+    { id: 'gallery-section', icon: Images, label: 'Albums' },
+    { id: 'countdown-section', icon: Clock, label: 'Drop' },
+    { id: 'quote-section', icon: Quote, label: 'Lyrics' },
     { id: 'rsvp-section', icon: Mail, label: 'RSVP' },
-    { id: 'map-section', icon: MapPin, label: 'Lokasi' },
   ]
 
   useEffect(() => {
@@ -49,15 +48,15 @@ const FloatingNavigation = () => {
 
   return (
     <>
-      {/* Toggle Button */}
+      {/* Toggle Button - Spotify style (Dark elevated circle) */}
       <motion.button
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 2, duration: 0.5 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-8 right-8 z-50 w-14 h-14 bg-gradient-to-br from-rose-600 to-gold-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:shadow-gold-500/50 transition-shadow"
+        className="fixed bottom-32 md:bottom-36 right-6 z-50 w-12 h-12 bg-[#282828] text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-[#3E3E3E] transition-all border border-white/10"
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
@@ -68,19 +67,17 @@ const FloatingNavigation = () => {
               exit={{ rotate: 90, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </motion.div>
           ) : (
             <motion.div
               key="menu"
-              initial={{ rotate: 90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: -90, opacity: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-              </svg>
+              <MoreVertical className="w-5 h-5" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -90,61 +87,39 @@ const FloatingNavigation = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.3 }}
-            className="fixed bottom-28 right-8 z-50 bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/50 p-4 max-w-xs"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="fixed bottom-48 md:bottom-52 right-6 z-50 bg-[#282828] rounded-lg shadow-2xl border border-white/10 p-2 w-[200px]"
           >
-            <div className="mb-4 pb-4 border-b border-gray-200">
-              <p className="text-sm font-semibold text-gray-700 uppercase tracking-wider">Navigasi</p>
+            <div className="mb-2 px-3 pt-2 pb-3 border-b border-white/10">
+              <p className="text-xs font-bold text-text-secondary uppercase tracking-widest">Jump To</p>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="flex flex-col gap-1">
               {sections.map((section) => {
                 const Icon = section.icon
                 const isActive = activeSection === section.id
 
                 return (
-                  <motion.button
+                  <button
                     key={section.id}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
                     onClick={() => scrollToSection(section.id)}
-                    className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-all ${
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-md transition-all text-sm font-medium ${
                       isActive
-                        ? 'bg-gradient-to-br from-rose-100 to-gold-100 text-rose-700'
-                        : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                        ? 'bg-white/10 text-spotify-green'
+                        : 'text-text-primary hover:bg-white/5'
                     }`}
                   >
-                    <Icon className="w-5 h-5" />
-                    <span className="text-xs font-medium">{section.label}</span>
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeIndicator"
-                        className="absolute inset-0 bg-gradient-to-br from-rose-200 to-gold-200 rounded-xl -z-10"
-                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                      />
-                    )}
-                  </motion.button>
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-spotify-green' : 'text-text-secondary'}`} />
+                    <span>{section.label}</span>
+                  </button>
                 )
               })}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Active Section Indicator (Small dot) */}
-      <motion.div
-        className="fixed top-8 right-8 z-40 hidden md:flex items-center gap-3 px-4 py-2 bg-white/80 backdrop-blur-lg rounded-full shadow-lg border border-white/50"
-        initial={{ x: 100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ delay: 2.5, duration: 0.5 }}
-      >
-        <div className="w-2 h-2 rounded-full bg-gold-500 animate-pulse" />
-        <span className="text-sm font-medium text-gray-700">
-          {sections.find((s) => s.id === activeSection)?.label}
-        </span>
-      </motion.div>
     </>
   )
 }
