@@ -1,173 +1,98 @@
 import { motion } from 'framer-motion'
-import { Calendar, Clock, MapPin, Navigation, Heart } from 'lucide-react'
+import { MapPin } from 'lucide-react'
 
 const EventDetails = ({ data }) => {
   const { pemberkatan, resepsi } = data.event
 
-  const EventCard = ({ title, date, time, location, address, isReception = false, index = 0 }) => (
+  const EventRow = ({ title, date, time, location, address, directUrl, index }) => (
     <motion.div
-      initial={{ opacity: 0, y: 50, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 1.2, delay: index * 0.2, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true, margin: '-50px' }}
-      whileHover={{ y: -10 }}
-      className={`relative ${isReception ? 'mt-12' : ''}`}
+      className="group flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 border-b border-white/10 hover:bg-white/5 transition-colors px-4 -mx-4 rounded-lg"
     >
-      {/* Glassmorphism Card */}
-      <div className="p-10 md:p-12 bg-white/50 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/60 overflow-hidden">
-        {/* Animated Background Gradient */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-gold-300/20 to-blush-300/20 rounded-full blur-3xl"
-        />
+      {/* Left: Date & Time Stack */}
+      <div className="flex items-start gap-6 mb-4 md:mb-0 w-full md:w-auto">
+         <div className="w-16 h-16 bg-spotify-elevated rounded-md flex flex-col items-center justify-center flex-shrink-0 text-center shadow-lg border border-white/5 group-hover:bg-spotify-highlight transition-colors">
+             <span className="text-xl font-bold text-white leading-none">{index === 0 ? '01' : '02'}</span>
+             <span className="text-[10px] text-text-secondary uppercase tracking-widest mt-1">Stage</span>
+         </div>
+         <div className="flex flex-col flex-1 pl-2">
+             <h3 className="text-lg md:text-xl font-bold text-text-primary mb-1">{title}</h3>
+             <p className="text-sm font-medium text-spotify-green mb-2">{date} • {time}</p>
+             <div className="flex items-start gap-2 mt-1">
+                <MapPin className="w-4 h-4 text-text-secondary flex-shrink-0 mt-0.5" />
+                <p className="text-xs md:text-sm text-text-secondary leading-snug">{location} <br className="hidden md:block"/>{address}</p>
+             </div>
+         </div>
+      </div>
 
-        {/* Content */}
-        <div className="relative z-10">
-          {/* Header */}
-          <div className="text-center mb-10">
-            <motion.div
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="inline-block mb-4"
-            >
-              <Heart className="w-8 h-8 text-gold-500 fill-gold-500" />
-            </motion.div>
-
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold bg-gradient-to-r from-rose-700 via-gold-600 to-rose-700 bg-clip-text text-transparent mb-4">
-              {title}
-            </h3>
-
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="flex items-center justify-center gap-3"
-            >
-              <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold-400 to-transparent" />
-              <div className="w-2 h-2 rounded-full bg-gold-400" />
-              <div className="h-px w-16 bg-gradient-to-l from-transparent via-gold-400 to-transparent" />
-            </motion.div>
-          </div>
-
-          {/* Event Details */}
-          <div className="space-y-6">
-            {/* Date */}
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-12 h-12 bg-pink-50 rounded-full flex items-center justify-center">
-                <Calendar className="w-6 h-6 text-pink-500" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-600 mb-1">Tanggal</p>
-                <p className="text-lg font-medium text-gray-900">{date}</p>
-              </div>
-            </div>
-
-            {/* Time */}
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-12 h-12 bg-purple-50 rounded-full flex items-center justify-center">
-                <Clock className="w-6 h-6 text-purple-500" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-600 mb-1">Waktu</p>
-                <p className="text-lg font-medium text-gray-900">{time}</p>
-              </div>
-            </div>
-
-            {/* Location */}
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center">
-                <MapPin className="w-6 h-6 text-blue-500" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-600 mb-1">Lokasi</p>
-                <p className="text-lg font-medium text-gray-900">{location}</p>
-                <p className="text-gray-600 mt-1">{address}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Navigation Button */}
-          <motion.a
-            href={data.map.directUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="mt-8 w-full flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors"
-          >
-            <Navigation className="w-5 h-5" />
-            <span>Buka di Google Maps</span>
-          </motion.a>
-        </div>
+      {/* Right: Action */}
+      <div className="mt-4 md:mt-0 flex-shrink-0 flex justify-end w-full md:w-auto pl-22 md:pl-0">
+         <motion.a
+           href={directUrl || data.map.directUrl}
+           target="_blank"
+           rel="noopener noreferrer"
+           whileHover={{ scale: 1.05 }}
+           whileTap={{ scale: 0.95 }}
+           className="bg-transparent border border-text-secondary hover:border-white text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-colors flex items-center justify-center w-full md:w-auto"
+         >
+           View Map
+         </motion.a>
       </div>
     </motion.div>
   )
 
   return (
-    <section id="event-section" className="py-20 bg-gradient-to-br from-gray-50 via-white to-pink-50">
-      <div className="max-w-4xl mx-auto px-4">
-        {/* Section Header */}
+    <section id="event-section" className="py-16 md:py-24 bg-spotify-base font-sans relative border-t border-white/5">
+      <div className="absolute inset-0 bg-gradient-to-t from-spotify-base via-spotify-elevated/5 to-spotify-base pointer-events-none" />
+      
+      <div className="max-w-4xl mx-auto px-6 md:px-10 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           className="mb-10"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-4">
-            Rangkaian Acara
-          </h2>
-          <p className="text-gray-600 text-lg">
-            Dengan memohon berkat dan ridho Tuhan Yang Maha Esa, kami bermaksud
-            menyelenggarakan pernikahan kami pada:
-          </p>
+           <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">On Tour</h2>
+           <p className="text-text-secondary text-sm md:text-base">Upcoming events and locations.</p>
         </motion.div>
 
-        {/* Event Cards */}
-        <div className="max-w-2xl mx-auto">
-          <EventCard
-            title="Pemberkatan Pernikahan"
-            date={pemberkatan.date}
-            time={pemberkatan.time}
-            location={pemberkatan.location}
-            address={pemberkatan.address}
-            index={0}
-          />
-
-          <EventCard
-            title="Resepsi"
-            date={resepsi.date}
-            time={resepsi.time}
-            location={resepsi.location}
-            address={resepsi.address}
-            isReception={true}
-            index={1}
-          />
+        <div className="flex flex-col relative">
+           <EventRow 
+             title="Pemberkatan Pernikahan"
+             date={pemberkatan.date}
+             time={pemberkatan.time}
+             location={pemberkatan.location}
+             address={pemberkatan.address}
+             directUrl={pemberkatan.mapUrl || data.map?.directUrl}
+             index={0}
+           />
+           <EventRow 
+             title="Resepsi & Perayaan"
+             date={resepsi.date}
+             time={resepsi.time}
+             location={resepsi.location}
+             address={resepsi.address}
+             directUrl={resepsi.mapUrl || data.map?.directUrl}
+             index={1}
+           />
         </div>
 
-        {/* Note */}
+        {/* Note equivalent in Spotify style */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center max-w-2xl mx-auto"
+           initial={{ opacity: 0 }}
+           whileInView={{ opacity: 1 }}
+           viewport={{ once: true }}
+           transition={{ delay: 0.3 }}
+           className="mt-12 md:mt-16 bg-spotify-surface border-l-4 border-spotify-green p-6 rounded-r-lg"
         >
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
-            <p className="text-sm text-gray-700">
-              <span className="font-semibold">
-                Mohon maaf apabila ada kesalahan dalam penulisan nama atau gelar.
-              </span>
-              <br />
-              <span className="text-gray-600 mt-2 inline-block">
-                Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
-                Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu dan
-                berkat bagi pernikahan kami.
-              </span>
-            </p>
-          </div>
+           <p className="text-sm font-bold text-text-primary mb-2 tracking-wide uppercase">Important Notice</p>
+           <p className="text-xs md:text-sm text-text-secondary leading-relaxed">
+             Merupakan suatu kehormatan apabila Anda berkenan hadir. <br className="hidden md:block" />
+             Mohon maaf apabila ada kesalahan dalam penulisan nama atau gelar pada undangan ini.
+           </p>
         </motion.div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Send, CheckCircle, Heart } from 'lucide-react'
+import { Send, CheckCircle, Disc3 } from 'lucide-react'
 
 const RSVP = ({ data }) => {
   const [formData, setFormData] = useState({
@@ -51,187 +51,157 @@ const RSVP = ({ data }) => {
   }
 
   return (
-    <section id="rsvp-section" className="relative py-24 md:py-32 bg-gray-50 overflow-hidden">
-      {/* Optimized Background - Removed heavy string anims & radial-gradient recalculations */}
-      <div className="absolute inset-0 pointer-events-none opacity-40">
-        <div className="absolute top-1/4 left-0 w-full md:w-3/4 h-[50vh] bg-gradient-to-br from-blush-100 to-transparent blur-[120px]" style={{ transform: 'translateZ(0)' }} />
-      </div>
-
-      {/* Floating Ornaments - Reduced count & simplified */}
-      <motion.div
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-32 right-10 text-blush-400/20 hidden lg:block"
-      >
-        <Heart className="w-16 h-16" fill="currentColor" />
-      </motion.div>
-
-      <div className="max-w-4xl mx-auto px-4 relative z-10">
+    <section id="rsvp-section" className="py-20 md:py-32 bg-spotify-base font-sans relative border-t border-white/5">
+      <div className="max-w-3xl mx-auto px-6 relative z-10">
+        
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <div className="flex justify-center items-center gap-4 mb-4">
-            <div className="w-12 h-px bg-gold-300"></div>
-            <p className="text-gold-600 uppercase tracking-[0.3em] text-sm font-medium">Buku Tamu</p>
-            <div className="w-12 h-px bg-gold-300"></div>
-          </div>
-
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 drop-shadow-sm mb-6">
-            Konfirmasi Kehadiran
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
+            Guest List
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto font-light">
-            Mohon konfirmasi kehadiran Anda untuk membantu kami mempersiapkan acara sebaik mungkin.
+          <p className="text-text-secondary text-sm md:text-base max-w-lg mx-auto">
+            Secure your spot for the live event. Let us know if you'll be joining us!
           </p>
         </motion.div>
 
-        {/* RSVP Form container - Stripped massive blur-3xl moving elements and lowered DOM nesting */}
+        {/* RSVP Form container */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="relative max-w-2xl mx-auto"
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ delay: 0.1 }}
+           className="bg-spotify-surface p-8 md:p-12 rounded-2xl shadow-2xl border border-white/5"
         >
-          {/* Main Card - Removed backdrop-blur-lg and used solid white for vastly superior mobile perf */}
-          <div className="p-8 md:p-12 lg:p-14 bg-white rounded-[2rem] shadow-xl border border-gray-100 relative overflow-hidden">
-             
-            <div className="relative z-10">
-              {isSubmitted ? (
-                /* Success Message */
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  className="text-center py-16"
+          {isSubmitted ? (
+            /* Success Message */
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-12"
+            >
+              <CheckCircle className="w-16 h-16 text-spotify-green mx-auto mb-6" />
+              <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">
+                You're on the list!
+              </h3>
+              <p className="text-text-secondary text-sm">
+                Your RSVP has been sent via WhatsApp. See you at the show.
+              </p>
+            </motion.div>
+          ) : (
+            /* Form */
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Name Field */}
+              <div>
+                <label className="block text-xs font-bold text-text-secondary uppercase tracking-[0.1em] mb-2">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-spotify-elevated border border-white/10 rounded-md focus:border-white focus:ring-1 focus:ring-white transition-all outline-none text-white placeholder-white/30"
+                  placeholder="Enter your name"
+                />
+              </div>
+
+              {/* Attendance Selection */}
+              <div>
+                <label className="block text-xs font-bold text-text-secondary uppercase tracking-[0.1em] mb-3">
+                  Attendance
+                </label>
+                <div className="grid grid-cols-2 gap-3 md:gap-4">
+                  {(['Hadir', 'Tidak Hadir']).map((option) => (
+                    <label
+                      key={option}
+                      className={`relative px-4 py-3 rounded-full border cursor-pointer transition-all text-center text-sm font-bold ${
+                        formData.attendance === option
+                          ? 'bg-white border-white text-black'
+                          : 'bg-transparent border-text-secondary text-text-secondary hover:border-white hover:text-white'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="attendance"
+                        value={option}
+                        checked={formData.attendance === option}
+                        onChange={handleChange}
+                        required
+                        className="sr-only"
+                      />
+                      <span>
+                        {option === 'Hadir' ? 'Attending' : 'Not Attending'}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Guests Field */}
+              <div>
+                <label className="block text-xs font-bold text-text-secondary uppercase tracking-[0.1em] mb-2">
+                  Plus Ones (Guests)
+                </label>
+                <select
+                  name="guests"
+                  value={formData.guests}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-spotify-elevated border border-white/10 rounded-md focus:border-white focus:ring-1 focus:ring-white transition-all outline-none text-white appearance-none cursor-pointer"
+                  style={{ backgroundImage: `url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>')`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center' }}
                 >
-                  <motion.div
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                    className="inline-block mb-6"
-                  >
-                    <CheckCircle className="w-20 h-20 text-green-500 mx-auto" />
-                  </motion.div>
-                  <h3 className="text-3xl font-serif font-bold text-gray-900 mb-4">
-                    Terima Kasih!
-                  </h3>
-                  <p className="text-gray-600 text-lg font-light">
-                    Pesan dan konfirmasi kehadiran Anda telah dikirim.
-                  </p>
-                </motion.div>
-              ) : (
-                /* Form */
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Name Field */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Nama Lengkap
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-gold-400 focus:ring-4 focus:ring-gold-50 transition-all outline-none text-gray-900"
-                      placeholder="Masukkan nama lengkap Anda"
-                    />
-                  </div>
+                  {[1, 2, 3, 4, 5].map((num) => (
+                    <option key={num} value={num.toString()} className="bg-spotify-surface text-white">
+                      {num} {num === 1 ? 'Person' : 'People'}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-                  {/* Attendance Selection */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
-                      Konfirmasi Kehadiran
-                    </label>
-                    <div className="grid grid-cols-2 gap-4">
-                      {(['Hadir', 'Tidak Hadir']).map((option) => (
-                        <label
-                          key={option}
-                          className={`relative p-4 rounded-xl border cursor-pointer transition-all ${
-                            formData.attendance === option
-                              ? 'bg-gold-50 border-gold-400 text-gold-800 shadow-sm'
-                              : 'bg-white border-gray-200 hover:border-gold-300 text-gray-600'
-                          }`}
-                        >
-                          <input
-                            type="radio"
-                            name="attendance"
-                            value={option}
-                            checked={formData.attendance === option}
-                            onChange={handleChange}
-                            required
-                            className="sr-only"
-                          />
-                          <span className={`block text-center font-medium`}>
-                            {option}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
+              {/* Message Field */}
+              <div>
+                <label className="block text-xs font-bold text-text-secondary uppercase tracking-[0.1em] mb-2">
+                  Message (Optional)
+                </label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows="4"
+                  className="w-full px-4 py-3 bg-spotify-elevated border border-white/10 rounded-md focus:border-white focus:ring-1 focus:ring-white transition-all outline-none text-white placeholder-white/30 resize-none"
+                  placeholder="Leave a message for the couple..."
+                />
+              </div>
 
-                  {/* Guests Field */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Jumlah Tamu
-                    </label>
-                    <select
-                      name="guests"
-                      value={formData.guests}
-                      onChange={handleChange}
-                      className="w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-gold-400 focus:ring-4 focus:ring-gold-50 transition-all outline-none text-gray-900"
-                    >
-                      {[1, 2, 3, 4, 5].map((num) => (
-                        <option key={num} value={num.toString()}>
-                          {num} {num === 1 ? 'Orang' : 'Orang'}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {/* Message Field */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Pesan (Opsional)
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows="4"
-                      className="w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-gold-400 focus:ring-4 focus:ring-gold-50 transition-all outline-none text-gray-900 resize-none"
-                      placeholder="Tinggalkan pesan untuk mempelai..."
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-gray-900 text-white rounded-xl shadow-lg hover:shadow-xl hover:bg-gray-800 active:scale-[0.98] transition-all font-medium disabled:opacity-70 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          <span>Memproses...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Send className="w-5 h-5" />
-                          <span>Kirim Konfirmasi via WhatsApp</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </form>
-              )}
-            </div>
-          </div>
+              {/* Submit Button */}
+              <div className="pt-4">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-spotify-green text-black rounded-full hover:scale-105 hover:bg-spotify-lightgreen active:scale-95 transition-all font-bold disabled:opacity-70 disabled:hover:scale-100 uppercase tracking-widest text-xs"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}>
+                         <Disc3 className="w-5 h-5" />
+                      </motion.div>
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-[18px] h-[18px]" />
+                      <span>Confirm RSVP</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          )}
         </motion.div>
 
       </div>

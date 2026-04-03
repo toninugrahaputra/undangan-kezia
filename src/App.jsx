@@ -57,80 +57,53 @@ function App() {
 
           <FloatingNavigation />
 
-          {/* Premium Footer */}
-          <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-20 overflow-hidden">
-             {/* Animated Background Pattern */}
-             <div className="absolute inset-0 opacity-[0.03]">
-              <div className="absolute inset-0" style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M30 0l4 8h8l-6 6 4 8-8-4-8 4 4-8-6-6h8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-              }} />
-            </div>
-
-            {/* Glowing orbs */}
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-gold-500/10 rounded-full blur-[100px]" style={{ transform: 'translateZ(0)' }} />
-              <div className="absolute bottom-0 left-0 w-96 h-96 bg-blush-500/10 rounded-full blur-[100px]" style={{ transform: 'translateZ(0)' }} />
-            </div>
-
-            {/* Content */}
-            <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-              
-              {/* Divider */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true }}
-                className="flex items-center justify-center gap-4 mb-12"
-              >
-                <div className="h-px w-24 bg-gradient-to-r from-transparent via-gold-400 to-transparent opacity-50" />
+          {/* Spotify Style Footer */}
+          <footer className="relative bg-[#000000] text-text-secondary py-16 md:py-24 border-t border-white/5 font-sans pb-32">
+             <div className="max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
+                
+                {/* Branding / Logo equivalent */}
                 <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="w-2 h-2 rounded-full bg-gold-400"
-                />
-                <div className="h-px w-24 bg-gradient-to-l from-transparent via-gold-400 to-transparent opacity-50" />
-              </motion.div>
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="mb-8"
+                >
+                  <div className="w-16 h-16 bg-spotify-elevated rounded-full flex items-center justify-center mx-auto mb-4 border border-white/10 shadow-lg">
+                    <span className="text-xl font-bold text-white tracking-widest">{invitationData.couple.groom.nickname[0]}<span className="text-spotify-green">&</span>{invitationData.couple.bride.nickname[0]}</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-1 tracking-tight">
+                    {invitationData.couple.groom.nickname} & {invitationData.couple.bride.nickname}
+                  </h3>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-spotify-green">The Live Experience</p>
+                </motion.div>
 
-              {/* Main Text */}
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true }}
-                className="text-3xl md:text-5xl font-serif font-bold mb-10 text-white drop-shadow-lg"
-              >
-                {invitationData.couple.groom.nickname} <span className="text-gold-400 font-light">&</span> {invitationData.couple.bride.nickname}
-              </motion.p>
+                {/* Bible Verse */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="mb-12 max-w-lg"
+                >
+                  <p className="text-sm md:text-base leading-relaxed text-text-secondary mb-3">
+                    "Sebab di mana dua atau tiga orang berkumpul dalam Nama-Ku, di situ Aku ada di tengah-tengah mereka."
+                  </p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-text-primary">— Matius 18:20</p>
+                </motion.div>
 
-              {/* Bible Verse */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true }}
-                className="mb-12"
-              >
-                <p className="text-gray-400 text-lg md:text-xl leading-relaxed italic max-w-2xl mx-auto font-light">
-                  "Sebab di mana dua atau tiga orang berkumpul dalam Nama-Ku, di situ Aku ada di tengah-tengah mereka"
-                </p>
-                <p className="text-gold-400/80 tracking-widest text-sm mt-4 uppercase">— Matius 18:20</p>
-              </motion.div>
-
-              {/* Thank You Message */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true }}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-white/5 backdrop-blur-md rounded-full border border-white/10 shadow-xl"
-              >
-                <span className="text-sm font-medium tracking-wide">Terima kasih atas doa & restu Anda</span>
-              </motion.div>
-            </div>
-
-            {/* Bottom Gradient Line */}
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-70" />
+                {/* Copyright / End note */}
+                <div className="pt-8 border-t border-white/10 w-full flex flex-col items-center text-xs space-y-2">
+                   <p>© {new Date().getFullYear()} {invitationData.couple.groom.nickname} & {invitationData.couple.bride.nickname}. All rights reserved.</p>
+                   <p>Terima kasih atas doa & restu Anda.</p>
+                   <div className="flex items-center gap-1.5 text-text-secondary/60 pt-4">
+                     <span>Sponsored by</span>
+                     <a href="https://www.instagram.com/tnugra_/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-spotify-green transition-colors font-medium underline decoration-white/30 underline-offset-2">Toni</a>
+                     <span>&</span>
+                     <a href="https://www.instagram.com/dev_mdc/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-spotify-green transition-colors font-medium underline decoration-white/30 underline-offset-2">Cahyo</a>
+                   </div>
+                </div>
+             </div>
           </footer>
         </motion.div>
       )}

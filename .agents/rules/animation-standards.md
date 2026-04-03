@@ -1,28 +1,20 @@
----
-trigger: always_on
----
-
 # Animation Standards
 
 Gunakan Framer Motion untuk semua animasi.
 
 ## Required Motion Patterns
 Setiap halaman atau section sebisa mungkin memanfaatkan:
-- scroll animation
-- parallax background
+- scroll animation (fade-in, slide up dari bawah)
+- card hover effects (scale up sedikit atau ubah warna background)
 - text reveal animation
-- floating elements
 - smooth transition antar section
 
 ## Mandatory Rules
-- Setiap section wajib memiliki animation entrance
-- Semua transisi harus smooth, tidak kasar, tidak mendadak
-- Animasi harus memperkuat kesan premium, bukan sekadar dekoratif
-- Hindari animasi berlebihan yang mengganggu keterbacaan
-- Gunakan timing yang lembut dan elegan
-- Pastikan animasi tetap nyaman di mobile
+- Gaya animasi harus terasa seperti navigasi dalam app (modern, cepat, tap/click responsive).
+- Hindari animasi mengambang (floating elements) yang terlalu lambat seperti daun berjatuhan, karena tidak relevan dengan tema UI Spotify.
+- Transisi harus *snappy* namun tetap mulus.
+- Hover state pada *card* sangat penting (mirip saat menyorot album/playlist di Spotify).
 
 ## Invitation Interaction
-- Saat undangan dibuka, gunakan confetti effect secara elegan
-- Confetti harus terasa celebratory namun tetap premium
-- Hindari efek yang terlalu ramai atau terasa murahan
+- Saat undangan dibuka (klik tombol Play), gunakan transisi geser mulus (*slide up*) atau *fade-out* dari komponen layar penutup (cover).
+- Hindari *confetti* kecuali didesain sangat minimalis berbentuk *particles* digital.

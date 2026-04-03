@@ -1,36 +1,32 @@
----
-trigger: always_on
----
+# Spotify Theme Wedding Invitation Design System
 
-# Premium Wedding Invitation Design System
-
-Project ini adalah website undangan digital premium berbasis React + Tailwind + Framer Motion.
+Project ini adalah website undangan digital bertema Spotify berbasis React + Tailwind + Framer Motion.
 
 ## Visual Direction
-Semua desain wajib terasa:
+Semua desain wajib meniru UI/UX dari aplikasi Spotify:
+- dark mode (base #121212)
 - modern
-- cinematic
-- elegant
-- premium
-- smooth
-- immersive
+- sleek
+- digital
+- clean
 
 ## Color Direction
-Gunakan komposisi warna:
-- soft gold
-- cream
-- white
-- pastel romantic
+Gunakan palet warna Spotify:
+- Background: Very dark gray (`#121212`)
+- Surface/Card: Dark gray (`#181818`)
+- Surface Hover: Light gray (`#282828`)
+- Primary Accent: Spotify Green (`#1DB954`)
+- Text Primary: White (`#FFFFFF`)
+- Text Secondary: Light gray (`#B3B3B3`)
 
-Hindari warna yang terlalu neon, terlalu kontras, atau terasa techy/corporate.
+Hindari warna-warna soft/pastel klasik atau elemen emas. Semuanya harus bernuansa gelap dan *neon text/accent*.
 
 ## Typography
-- Gunakan font serif elegan untuk heading
-- Gunakan sans-serif yang clean dan mudah dibaca untuk body text
+- Gunakan HANYA font sans-serif modern (Inter)
+- Jangan gunakan font Serif sama sekali.
+- Gunakan font-weight yang tebal (Bold/Extrabold) untuk heading, mirip gaya desain Circular dari Spotify.
 
 ## General UI Principles
-- Jangan membuat desain statis
-- Semua UI harus terasa hidup dan premium
-- Setiap section harus punya focal point visual yang jelas
-- Selalu prioritaskan kesan mewah, halus, dan berkelas
-- Pastikan tampilan tetap rapi dan elegan di mobile
+- UI harus meniru struktur Spotify (ada "Album Art", "Artist Page", "Tour Dates", "Now Playing" bar).
+- Gunakan tombol play besar berwarna hijau sebagai interaksi utama.
+- Cards harus punya hover state yang sedikit mencerahkan background-nya (berpindah ke `#282828` atau `#3E3E3E`).

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,25 +6,28 @@
 
 body {
   font-family: 'Inter', sans-serif;
+  background-color: #121212;
+  color: #FFFFFF;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar - Premium styling */
+/* Custom scrollbar - Spotify Dark styling */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: linear-gradient(to bottom, #f9fafb, #f3f4f6);
+  background: #121212;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #fbbf24, #f59e0b);
-  border-radius: 10px;
-  border: 2px solid #f9fafb;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #f59e0b, #d97706);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 /* Smooth scroll behavior */
@@ -35,53 +38,19 @@ html {
 
 /* Selection styling */
 ::selection {
-  background-color: rgba(251, 191, 36, 0.3);
-  color: #78350F;
+  background-color: #1DB954;
+  color: #FFFFFF;
 }
 
 /* Focus visible styling */
 :focus-visible {
-  outline: 2px solid #fbbf24;
+  outline: 2px solid #1DB954;
   outline-offset: 2px;
 }
 
-/* Glassmorphism utility */
 @layer utilities {
-  .glassmorphism {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
   .text-balance {
     text-wrap: balance;
-  }
-
-  /* Premium shadow utilities */
-  .shadow-premium-sm {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  }
-
-  .shadow-premium-md {
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  }
-
-  .shadow-premium-lg {
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  }
-
-  .shadow-premium-xl {
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Glow effects */
-  .glow-gold {
-    box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
-  }
-
-  .glow-blush {
-    box-shadow: 0 0 30px rgba(255, 63, 92, 0.3);
   }
 }
 
@@ -95,10 +64,4 @@ html {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Preload critical fonts */
-@font-face {
-  font-family: 'Playfair Display';
-  font-display: swap;
 }
