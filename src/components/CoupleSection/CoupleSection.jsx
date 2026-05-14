@@ -63,20 +63,6 @@ const CoupleSection = ({ data }) => {
            <ArtistCard person={data.couple.bride} role="Bride" delay={0.2} />
         </div>
 
-        {/* Lyrics Style Quote */}
-        <motion.div
-           initial={{ opacity: 0 }}
-           whileInView={{ opacity: 1 }}
-           viewport={{ once: true }}
-           transition={{ duration: 1, delay: 0.3 }}
-           className="mt-16 text-center max-w-3xl mx-auto py-16 px-6 rounded-2xl bg-gradient-to-b from-spotify-surface to-spotify-base"
-        >
-           <Heart className="w-8 h-8 text-spotify-green mx-auto mb-8 animate-pulse" />
-           <h3 className="text-xl md:text-3xl font-bold text-text-primary leading-relaxed mb-6">
-             "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan-pasangan dari jenismu sendiri..."
-           </h3>
-           <p className="text-text-secondary text-sm uppercase tracking-widest font-bold">Lyrics by Destiny</p>
-        </motion.div>
       </div>
     </section>
   )

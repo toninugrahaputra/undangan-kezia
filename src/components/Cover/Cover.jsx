@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Play } from 'lucide-react'
 
-const Cover = ({ data, onOpen }) => {
+const Cover = ({ data, onOpen, guestName }) => {
   // Spotify-style fade transition
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -32,23 +32,25 @@ const Cover = ({ data, onOpen }) => {
       <div className="relative z-10 w-full max-w-md px-8 flex flex-col items-center mt-12">
         {/* Album Art Image Wrapper */}
         <motion.div 
-          className="w-64 h-64 md:w-80 md:h-80 aspect-square rounded-md bg-spotify-surface shadow-[0_20px_40px_rgba(0,0,0,0.5)] mb-10 overflow-hidden relative group"
+          className="w-64 h-64 md:w-80 md:h-80 aspect-square rounded-md bg-spotify-surface shadow-[0_20px_40px_rgba(0,0,0,0.5)] mb-10 overflow-hidden relative group border border-white/5"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           whileHover={{ scale: 1.02 }}
         >
-           {/* Temporary Album Art - In a real setup, we use an image. For now, a sleek dark gradient with initials. */}
-           <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black flex items-center justify-center">
-             <span className="text-6xl font-bold text-white/10 tracking-widest">
-                {data.couple.groom.nickname[0]}&{data.couple.bride.nickname[0]}
-             </span>
-           </div>
+           {/* Album Art Image */}
+           <img 
+            src={data.gallery?.[12] || data.couple.groom.photo} 
+            alt="Wedding Album Art" 
+            className="w-full h-full object-cover"
+           />
+           {/* Subtle Spotify Overlay */}
+           <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
         </motion.div>
 
         {/* Track Title / Wedding Title */}
         <motion.div 
-          className="w-full text-center md:text-left mb-8 flex flex-col md:flex-row md:justify-between md:items-end"
+          className="w-full text-center md:text-left mb-6 flex flex-col md:flex-row md:justify-between md:items-end"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -62,6 +64,21 @@ const Cover = ({ data, onOpen }) => {
             </p>
           </div>
         </motion.div>
+
+        {/* Guest Name Section */}
+        {guestName && (
+          <motion.div 
+            className="w-full text-center md:text-left mb-8"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
+          >
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-text-secondary mb-2">Special Guest:</p>
+            <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight">
+              {guestName}
+            </h2>
+          </motion.div>
+        )}
 
         {/* Controls row - Play Button */}
         <motion.div 

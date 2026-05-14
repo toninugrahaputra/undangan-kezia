@@ -16,7 +16,11 @@ import ScrollProgress from './components/ScrollProgress/ScrollProgress'
 import invitationData from './data/invitationData.json'
 
 function App() {
-  // Hanya butuh dua state: COVER dan MAIN karena Gate sekarang berada di dalam layout Scroll MAIN
+  // Ambil nama tamu dari URL parameter ?to=Nama+Tamu
+  const queryParams = new URLSearchParams(window.location.search);
+  const guestName = queryParams.get('to');
+
+  // Hanya butuh dua state: COVER dan MAIN
   const [appState, setAppState] = useState('COVER') // 'COVER' | 'MAIN'
 
   return (
@@ -26,6 +30,7 @@ function App() {
           <Cover
             key="cover"
             data={invitationData}
+            guestName={guestName}
             onOpen={() => setAppState('MAIN')}
           />
         )}
@@ -52,7 +57,7 @@ function App() {
           <Quote data={invitationData} />
           <EventDetails data={invitationData} />
           <Gallery data={invitationData} />
-          <RSVP data={invitationData} />
+          <RSVP data={invitationData} guestName={guestName} />
           <Map data={invitationData} />
 
           <FloatingNavigation />

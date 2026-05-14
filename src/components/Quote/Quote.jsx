@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 const Quote = ({ data }) => {
   return (
-    <section id="quote-section" className="relative py-24 md:py-32 bg-spotify-base font-sans overflow-hidden border-t border-white/5">
+    <section id="quote-section" className="relative py-16 md:py-20 bg-spotify-base font-sans overflow-hidden border-t border-white/5">
       {/* Abstract Background like Spotify Lyrics */}
       <div className="absolute inset-0 pointer-events-none">
          <motion.div 
@@ -41,7 +41,7 @@ const Quote = ({ data }) => {
            whileInView={{ opacity: 1 }}
            viewport={{ once: true }}
            transition={{ delay: 0.3 }}
-           className="mt-20 md:mt-32 border-l-2 border-white/10 pl-6"
+           className="mt-12 md:mt-16 border-l-2 border-white/10 pl-6"
         >
            <p className="text-text-secondary text-sm md:text-md max-w-xl font-medium leading-relaxed">
              Kami berharap semoga pernikahan kami menjadi awal dari kehidupan yang penuh cinta,

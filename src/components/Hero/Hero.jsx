@@ -9,7 +9,7 @@ const Hero = ({ data }) => {
   const bgY = useTransform(scrollY, [0, 800], [0, 150])
   const opacity = useTransform(scrollY, [100, 600], [1, 0])
   
-  const heroImage = data.gallery?.[0] || "https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80"
+  const heroImage = data.gallery?.[4] || "https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80"
   
   const coupleName = `${groom.nickname} & ${bride.nickname}`
   const weddingDate = new Date(data.event.weddingDate).toLocaleDateString('id-ID', {
