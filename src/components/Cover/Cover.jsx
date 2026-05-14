@@ -3,7 +3,7 @@ import { Heart, Calendar } from 'lucide-react'
 import confetti from 'canvas-confetti'
 import { useState, useEffect } from 'react'
 
-const Cover = ({ data, onOpen }) => {
+const Cover = ({ data, onOpen, guest }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   // Parallax effect based on mouse movement
@@ -360,7 +360,7 @@ const Cover = ({ data, onOpen }) => {
         </motion.div>
 
         {/* Date with Cinematic Styling */}
-        <motion.div variants={itemVariants} className="mb-16">
+        <motion.div variants={itemVariants} className="mb-8">
           <motion.div
             className="inline-flex items-center gap-4 px-8 py-4 bg-white/60 backdrop-blur-sm rounded-full shadow-lg border border-pink-200"
             whileHover={{ scale: 1.05 }}
@@ -379,6 +379,20 @@ const Cover = ({ data, onOpen }) => {
             </div>
           </motion.div>
         </motion.div>
+
+        {/* Guest Name Section */}
+        {guest && (
+          <motion.div
+            variants={itemVariants}
+            className="mb-12"
+          >
+            <p className="text-gray-600 text-sm uppercase tracking-[0.2em] mb-3">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+            <h2 className="text-2xl md:text-4xl font-serif font-bold text-gray-900 drop-shadow-sm capitalize">
+              {guest.name}
+            </h2>
+            <div className="h-0.5 w-24 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mt-4" />
+          </motion.div>
+        )}
 
         {/* Premium Open Button */}
         <motion.div variants={itemVariants} className="relative">

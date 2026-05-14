@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import axios from 'axios'
 import { motion, AnimatePresence } from 'framer-motion'
 import Cover from './components/Cover/Cover'
 import GateTransition from './components/GateTransition/GateTransition'
@@ -14,10 +16,42 @@ import MusicPlayer from './components/MusicPlayer/MusicPlayer'
 import FloatingNavigation from './components/FloatingNavigation/FloatingNavigation'
 import ScrollProgress from './components/ScrollProgress/ScrollProgress'
 import invitationData from './data/invitationData.json'
-
 function App() {
-  // Hanya butuh dua state: COVER dan MAIN karena Gate sekarang berada di dalam layout Scroll MAIN
   const [appState, setAppState] = useState('COVER') // 'COVER' | 'MAIN'
+  const [guest, setGuest] = useState(null)
+  const location = useLocation()
+
+  useEffect(() => {
+    const fetchGuest = async () => {
+      // Ambil slug dari path (misal /budi-santoso) atau query param (?to=Budi)
+      const pathSlug = location.pathname.split('/')[1]
+      const queryParams = new URLSearchParams(location.search)
+      const toParam = queryParams.get('to')
+
+      if (pathSlug) {
+        try {
+          const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+          const response = await axios.get(`${apiUrl}/api/guests/${pathSlug}`)
+          setGuest(response.data)
+        } catch (error) {
+          console.error('Guest not found in database, using name from URL if exists')
+          const fallbackName = (toParam || pathSlug.replace(/-/g, ' '))
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+          setGuest({ name: fallbackName })
+        }
+      } else if (toParam) {
+        const formattedParam = toParam
+          .split(' ')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ')
+        setGuest({ name: formattedParam })
+      }
+    }
+
+    fetchGuest()
+  }, [location])
 
   return (
     <div className="min-h-screen bg-black">
@@ -26,6 +60,7 @@ function App() {
           <Cover
             key="cover"
             data={invitationData}
+            guest={guest}
             onOpen={() => setAppState('MAIN')}
           />
         )}
@@ -52,7 +87,7 @@ function App() {
           <Quote data={invitationData} />
           <EventDetails data={invitationData} />
           <Gallery data={invitationData} />
-          <RSVP data={invitationData} />
+          <RSVP data={invitationData} guest={guest} />
           <Map data={invitationData} />
 
           <FloatingNavigation />

@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Send, CheckCircle, Heart } from 'lucide-react'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
-const RSVP = ({ data }) => {
+const RSVP = ({ data, guest }) => {
+  const { slug } = useParams()
   const [formData, setFormData] = useState({
-    name: '',
+    name: guest?.name || '',
     attendance: '',
     guests: '1',
     message: '',
@@ -12,9 +15,30 @@ const RSVP = ({ data }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
+  // Update name if guest prop changes
+  useEffect(() => {
+    if (guest?.name) {
+      setFormData(prev => ({ ...prev, name: guest.name }))
+    }
+  }, [guest])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
+
+    // Kirim ke backend jika ada slug
+    if (slug || guest?.slug) {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+        await axios.post(`${apiUrl}/api/guests/${slug || guest.slug}/rsvp`, {
+          is_attending: formData.attendance === 'Hadir',
+          message: formData.message,
+          attendance_count: parseInt(formData.guests)
+        })
+      } catch (error) {
+        console.error('Failed to save RSVP to backend', error)
+      }
+    }
 
     // Create WhatsApp message
     const message = `Halo, saya ${formData.name}%0A%0A` +
@@ -24,11 +48,9 @@ const RSVP = ({ data }) => {
 
     const whatsappUrl = `https://wa.me/${data.rsvp.waNumber}?text=${message}`
 
-    // Simulate loading then open WhatsApp
-    setTimeout(() => {
-      window.open(whatsappUrl, '_blank')
-      setIsSubmitting(false)
-      setIsSubmitted(true)
+    window.open(whatsappUrl, '_blank')
+    setIsSubmitting(false)
+    setIsSubmitted(true)
 
       // Reset form after 3 seconds
       setTimeout(() => {
@@ -40,7 +62,6 @@ const RSVP = ({ data }) => {
           message: '',
         })
       }, 3000)
-    }, 1000)
   }
 
   const handleChange = (e) => {

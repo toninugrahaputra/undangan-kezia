@@ -3,7 +3,7 @@
     "groom": {
       "name": "Yosua Okta Firmana S",
       "nickname": "Yosua",
-      "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+      "photo": "/img/IMG_8691.JPG",
       "bio": "Hai! Saya Yosua, seorang yang antusias dan selalu siap menghadapi petualangan baru. Saya percaya bahwa cinta sejati itu tentang saling mendukung dan tumbuh bersama.",
       "hobbies": ["Traveling", "Photography", "Music", "Coffee"],
       "parents": {
@@ -14,15 +14,14 @@
     "bride": {
       "name": "Kezia Febrianti K",
       "nickname": "Kezia",
-      "photo": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+      "photo": "/img/IMG_8692.JPG",
       "bio": "Hello! Saya Kezia, yang suka hal-hal kreatif dan ketenangan. Saya bersyukur bisa menemukan pasangan hidup yang selalu mendukung mimpi-mimpi saya.",
       "hobbies": ["Design", "Reading", "Music"],
       "parents": {
         "father": "Asori",
         "mother": "Dwi Retno Ningsih (Almh)"
       }
-    },
-    "story": "Kami bertemu di kampus tahun 2020 saat satu kelas. Perkenalan singkat di perpustakaan berlanjut menjadi friendship yang mendalam. Tiga tahun bersama, kami belajar banyak hal satu sama lain. Dan sekarang, kami siap melangkah ke jenjang yang lebih serius bersama."
+    }
   },
   "event": {
     "weddingDate": "2026-06-01T10:00:00",
@@ -35,17 +34,23 @@
     "resepsi": {
       "date": "01 Juni 2026",
       "time": "12.00 s/d selesai",
-      "location": "Sumberawan rt 09/03",
+      "location": "Sumberawan RT 09 / RW 03",
       "address": "Toyomarto Singosari"
     }
   },
   "gallery": [
-    "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&h=400&fit=crop"
+    "/img/IMG_8691.JPG",
+    "/img/IMG_8692.JPG",
+    "/img/IMG_8693.JPG",
+    "/img/IMG_8695.JPG",
+    "/img/IMG_8697.JPG",
+    "/img/IMG_8698.JPG",
+    "/img/IMG_8702.JPG",
+    "/img/IMG_9042.JPG",
+    "/img/IMG_9043.JPG",
+    "/img/IMG_9044.JPG",
+    "/img/IMG_9045.JPG",
+    "/img/IMG_9047.JPG"
   ],
   "quote": {
     "text": "Kasih itu sabar, kasih itu murah hati, ia tidak cemburu. Kasih itu tidak memegahkan diri, ia tidak sombong. Ia tidak melakukan yang tidak sopan, ia tidak mencari keuntungan diri sendiri, ia tidak mudah marah. Ia tidak menyimpan kesalahan orang lain. Kasih tidak bersukacita karena ketidakadilan, tetapi karena kebenaran. Kasih menutupi segala sesuatu, percaya segala sesuatu, mengharapkan segala sesuatu, sabar menanggung segala sesuatu. Kasih tidak berkesudahan.",
