@@ -101,12 +101,10 @@ function App() {
                 <div className="pt-8 border-t border-white/10 w-full flex flex-col items-center text-xs space-y-2">
                    <p>© {new Date().getFullYear()} {invitationData.couple.groom.nickname} & {invitationData.couple.bride.nickname}. All rights reserved.</p>
                    <p>Terima kasih atas doa & restu Anda.</p>
-                   <div className="flex items-center gap-1.5 text-text-secondary/60 pt-4">
-                     <span>Sponsored by</span>
-                     <a href="https://www.instagram.com/tnugra_/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-spotify-green transition-colors font-medium underline decoration-white/30 underline-offset-2">Toni</a>
-                     <span>&</span>
-                     <a href="https://www.instagram.com/dev_mdc/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-spotify-green transition-colors font-medium underline decoration-white/30 underline-offset-2">Cahyo</a>
-                   </div>
+                    <div className="flex items-center gap-1.5 text-text-secondary/60 pt-4">
+                      <span>Developed by</span>
+                      <span className="text-white font-medium">T&C Digital Solutions</span>
+                    </div>
                 </div>
              </div>
           </footer>
